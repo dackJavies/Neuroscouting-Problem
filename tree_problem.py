@@ -58,12 +58,11 @@ class Node:
 
 
 def main():
-    desired_depth_str = input("How deep should this tree be? ")
-    desired_depth_int = int(desired_depth_str)
-    if not valid_input(desired_depth_int):
-        print "Invalid input: " + desired_depth_str + ". Input cannot be negative or zero."
+    desired_depth = input("How deep should this tree be? ")
+    if not valid_input(desired_depth):
+        print "Invalid input: " + str(desired_depth) + ". Input cannot be negative or zero."
         return
-    Node.max_depth = desired_depth_int
+    Node.max_depth = desired_depth
 
     print "Generating tree..."
     root = Node("", 1, 1)
