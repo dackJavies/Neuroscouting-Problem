@@ -66,10 +66,12 @@ def main():
     Node.max_depth = desired_depth_int
 
     print "Generating tree..."
-    root = Node(1, 1, None)
+    root = Node("", 1, 1)
 
     if not valid_tree(root):
-        print "Looks like this tree isn't correct"
+        print "Looks like this tree isn't correct."
+    else:
+        print "Great! The tree seems to be valid."
 
     print "Let's take a look at your tree."
     display_tree(root)
@@ -185,8 +187,8 @@ def test_tree_validity():
     print "Valid? " + str(valid_tree(root5))
 
 # test_tree_building()
-test_tree_validity()
-
+# test_tree_validity()
+main()
 
 
 
