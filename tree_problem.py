@@ -80,7 +80,23 @@ def valid_input(desired_depth):
 
 
 def valid_tree(root):
-    return True
+    if root.left is None and root.right is None:
+        if root.depth == 1:
+            return root.value == 1
+        return True
+    else:
+        left_valid = right_valid = False
+        if root.lft_nbor is None:
+            left_valid = root.left.value == root.value
+        else:
+            left_valid = root.left.value == root.value + root.lft_nbor.value
+
+        if root.rgt_nbor is None:
+            right_valid = root.right.value == root.value
+        else:
+            right_valid = root.right.value == root.value + root.rgt_nbor.value
+
+        return left_valid and right_valid and valid_tree(root.left) and valid_tree(root.right)
 
 
 def display_tree(root):
@@ -116,8 +132,60 @@ def test_tree_building():
     root5 = Node("", 1, 1)
     display_tree(root5)
 
-# test_tree_building()
+def test_tree_validity():
 
+    Node.max_depth = 1
+    print "~~~ depth 1 ~~~"
+    root1 = Node("", 1, 1)
+    display_tree(root1)
+    print "Valid? " + str(valid_tree(root1))
+    print "Changing root val to 45"
+    root1.value = 45
+    display_tree(root1)
+    print "Valid? " + str(valid_tree(root1))
+
+    Node.max_depth = 2
+    print "~~~ depth 2 ~~~"
+    root2 = Node("", 1, 1)
+    display_tree(root2)
+    print "Valid? " + str(valid_tree(root2))
+    print "Changing R val to 8"
+    root2.right.value = 8
+    display_tree(root2)
+    print "Valid? " + str(valid_tree(root2))
+
+    Node.max_depth = 3
+    print "~~~ depth 3 ~~~"
+    root3 = Node("", 1, 1)
+    display_tree(root3)
+    print "Valid? " + str(valid_tree(root3))
+    print "Changing RL val to 34"
+    root3.right.left.value = 34
+    display_tree(root3)
+    print "Valid? " + str(valid_tree(root3))
+
+    Node.max_depth = 4
+    print "~~~ depth 4 ~~~"
+    root4 = Node("", 1, 1)
+    display_tree(root4)
+    print "Valid? " + str(valid_tree(root4))
+    print "Changing LRL val to 99"
+    root4.left.right.left.value = 99
+    display_tree(root4)
+    print "Valid? " + str(valid_tree(root4))
+
+    Node.max_depth = 5
+    print "~~~ depth 5 ~~~"
+    root5 = Node("", 1, 1)
+    display_tree(root5)
+    print "Valid? " + str(valid_tree(root5))
+    print "Changing RRLL val to 535"
+    root5.right.right.left.left.value = 535
+    display_tree(root5)
+    print "Valid? " + str(valid_tree(root5))
+
+# test_tree_building()
+test_tree_validity()
 
 
 
